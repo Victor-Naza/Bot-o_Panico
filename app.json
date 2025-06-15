@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "BotãoPanico",
+    "slug": "BotaoPanico",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/Icone_BotaoPanico.png",
+    "scheme": "botaopanico",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/Icone_BotaoPanico.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ],
+      "package": "com.victornaza.BotaoPanico"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "35a29c4d-c569-4f84-aa61-4ed469f70bab"
+      }
+    }
+  }
+}
