@@ -35,7 +35,7 @@ const configuracaoStyles = StyleSheet.create({
     marginBottom: 30,
   },
   preProgramadaButton: {
-    backgroundColor: "#6200ea", // cor roxa do botão config
+    backgroundColor: "#778899", // cor roxa do botão config
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 20,
@@ -74,17 +74,6 @@ const configuracaoStyles = StyleSheet.create({
     fontSize: 16,
     color: "#333",
   },
-  removerButton: {
-    backgroundColor: "#e63946", // vermelho do botão de alerta
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 20,
-    elevation: 3,
-    shadowColor: "#b22222",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
-  },
   removerButtonText: {
     color: "#fff",
     fontWeight: "700",
@@ -93,7 +82,7 @@ const configuracaoStyles = StyleSheet.create({
     marginTop: "auto",
   },
   botaoPrincipal: {
-    backgroundColor: "#2a9d8f", // verde do salvar
+    backgroundColor: "#3CB371", // verde do salvar
     paddingVertical: 12,
     paddingHorizontal: 25,
     borderRadius: 20,

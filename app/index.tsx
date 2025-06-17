@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Alert, Linking } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { View, Text, TouchableOpacity, Alert, Linking, Animated } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Location from "expo-location";
 import { useRouter } from "expo-router";
@@ -9,6 +9,7 @@ const BotaoPanico = () => {
   const [contato, setContato] = useState<string | null>(null);
   const [mensagem, setMensagem] = useState<string | null>(null);
   const router = useRouter();
+  const scaleAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     const carregarDados = async () => {
@@ -22,7 +23,23 @@ const BotaoPanico = () => {
     };
 
     carregarDados();
-  }, []);
+
+    // Animação de pulsar
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(scaleAnim, {
+          toValue: 1.05,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleAnim, {
+          toValue: 1,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
+  }, [scaleAnim]);
 
   const handlePress = async () => {
     if (!contato) {
@@ -50,13 +67,11 @@ const BotaoPanico = () => {
 
     const mensagemFinal = `${mensagem}\n${locationText}`;
 
-    // Tenta primeiro pelo esquema nativo
     let url = `whatsapp://send?phone=${contato}&text=${encodeURIComponent(mensagemFinal)}`;
 
     let supported = await Linking.canOpenURL(url);
 
     if (!supported) {
-      // Se não funcionar, tenta o link web
       url = `https://wa.me/${contato}?text=${encodeURIComponent(mensagemFinal)}`;
       supported = await Linking.canOpenURL(url);
     }
@@ -80,13 +95,15 @@ const BotaoPanico = () => {
 
       <Text style={botaoPanicoStyles.title}>Botão de Pânico</Text>
 
-      <TouchableOpacity
-        style={botaoPanicoStyles.alertButton}
-        onPress={handlePress}
-        activeOpacity={0.8}
-      >
-        <Text style={botaoPanicoStyles.alertButtonText}>🚨 ALERTA 🚨</Text>
-      </TouchableOpacity>
+      <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+        <TouchableOpacity
+          style={botaoPanicoStyles.alertButton}
+          onPress={handlePress}
+          activeOpacity={0.8}
+        >
+          <Text style={botaoPanicoStyles.alertButtonText}>🚨 ALERTA 🚨</Text>
+        </TouchableOpacity>
+      </Animated.View>
     </View>
   );
 };
